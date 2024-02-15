@@ -20,6 +20,7 @@ pipeline {
     }
     stage('Deploy') {
       steps{
+        sh 'mkdir ~/deployed'
         sh 'mv ~/jenkins-test/script.sh ~/deployed/script.sh'
         sh 'ls ~/deployed'
       }
