@@ -6,23 +6,20 @@ pipeline {
   stages {
     stage('Build') {
       steps{
-        sh 'touch ~/jenkins-test/script.sh'
-        sh 'echo "echo "Im running!"" > script.sh'
+        sh 'chmod +x build.sh'
+        sh 'chmod +x test.sh'
+        sh 'chmod +x deploy.sh'
+        sh './build.sh'
       }
     }
     stage('Test') {
       steps{
-        sh 'cd ~/jenkins-test/'
-        sh 'ls -a'
-        sh 'chmod +x script.sh'
-        sh './script.sh'
+        sh './test.sh'
       }
     }
     stage('Deploy') {
       steps{
-        sh 'mkdir ~/deployed || true'
-        sh 'mv ~/jenkins-test/script.sh ~/deployed/script.sh'
-        sh 'ls ~/deployed'
+        sh './deploy.sh'
       }
     }
   }
