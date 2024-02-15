@@ -4,14 +4,24 @@ pipeline {
   }
   /* environment {} */
   stages {
-    stage('make directory') {
+    stage('Build') {
       steps{
-        sh 'mkdir ~/jenkins-test || true'
+        sh 'touch ~/jenkins-test/script.sh'
+        sh 'echo "echo "Im running!"" > script.sh'
       }
     }
-    stage('make files') {
+    stage('Test') {
       steps{
-        sh 'touch ~/jenkins-test/file1.txt'
+        sh 'cd ~/jenkins-test/'
+        sh 'ls -a'
+        sh 'chmod +x script.sh'
+        sh './script.sh'
+      }
+    }
+    stage('Deploy') {
+      steps{
+        sh 'mv ~/jenkins-test/script.sh ~/deployed/script.sh'
+        sh 'ls ~/deployed'
       }
     }
   }
