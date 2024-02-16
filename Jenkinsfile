@@ -22,7 +22,7 @@ pipeline {
     stage('Deploy') {
       steps{
         sh 'docker run -d --network lab3-net --name flask-app flask-app'
-        sh 'docker run -d -p 80:80 --network lab3-net --name nginx nginx --mount type=bind,source=$(pwd)/nginx.conf,target=/etc/nginx/nginx.conf'
+        sh 'docker run -d -p 80:80 --network lab3-net --mount type=bind,source=$(pwd)/nginx.conf,target=/etc/nginx/nginx.conf --name nginx nginx'
       }
     }
     stage('Test') {
