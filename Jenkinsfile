@@ -6,10 +6,11 @@ pipeline {
   stages {
     stage('Clean') {
       steps{
-        sh 'docker rm nginx -f'
-        sh 'docker rm flask-app -f'
-        sh 'docker rmi nginx -f'
-        sh 'docker rmi flask-app -f'
+        sh 'docker rm nginx -f || true'
+        sh 'docker rm flask-app -f || true'
+        sh 'docker rmi nginx -f || true'
+        sh 'docker rmi flask-app -f || true'
+        sh 'docker network rm lab3-net -f || true'
       }
     }
     stage('Build') {
