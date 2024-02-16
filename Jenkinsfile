@@ -6,20 +6,19 @@ pipeline {
   stages {
     stage('Build') {
       steps{
-        sh 'chmod +x build.sh'
-        sh 'chmod +x test.sh'
-        sh 'chmod +x deploy.sh'
-        sh './build.sh'
-      }
-    }
-    stage('Test') {
-      steps{
-        sh './test.sh'
+        sh 'docker network create lab3-net'
+        sh 'docker build -t flask-app .'
       }
     }
     stage('Deploy') {
       steps{
-        sh './deploy.sh'
+        sh 'docker run -d --network lab3-net --name flask-app flask-app'
+        sh 'docker run -d -p 80:80 --network lab3-net --name nginx nginx'
+      }
+    }
+    stage('Test') {
+      steps{
+        sh 'curl localhost'
       }
     }
   }
