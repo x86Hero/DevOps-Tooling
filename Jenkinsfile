@@ -4,6 +4,14 @@ pipeline {
   }
   /* environment {} */
   stages {
+    stage('Clean') {
+      steps{
+        sh 'docker rm nginx -f'
+        sh 'docker rm flask-app -f'
+        sh 'docker rmi nginx -f'
+        sh 'docker rmi flask-app -f'
+      }
+    }
     stage('Build') {
       steps{
         sh 'docker network create lab3-net'
