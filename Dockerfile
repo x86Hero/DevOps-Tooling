@@ -9,4 +9,4 @@ ENV YOUR_NAME Ashley
 # Expose the correct port
 EXPOSE 5500
 # Create an entrypoint
-ENTRYPOINT ["Python", "app.py"]
+ENTRYPOINT ["python3", "app.py"]
